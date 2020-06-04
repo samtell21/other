@@ -1,10 +1,10 @@
 module SwapOut
     refine Enumerable do
         def swap(arr)
-            map.with_index{|e, i| arr[i] ? arr[i] : e}
+            map.with_index{|e, i| arr[i] || e}
         end
         def append_or_swap(arr)
-            map.with_index{|e, i| arr[i] ? (e+arr[i] rescue arr[i]) : e}
+            map.with_index{|e, i| (e+arr[i] rescue arr[i]) || e}
         end
     end
 end
