@@ -1,7 +1,7 @@
 
 #using ruby
-#I wrote a couple different algorithms haha
-#definitely overcomplicating it...  But I refused to take the easy way out!
+#wrote some disgusting algorithms (the second one's not bad)
+#I think I'm gonna start from scratch...
 
 #some duck-typing
 def cracklepop1
@@ -36,9 +36,7 @@ def cracklepop3
     end
 end
 
-#you asked to print so here it is
-#if they are all the same, it will print one of them
-#if not, well, it doesn't matter
-(1..3).map{|i| send("cracklepop#{i}".to_sym)}.uniq.length == 1 ? puts(cracklepop1) : raise(":O")
+
+(1..3).map{|i| eval "cracklepop#{i}"}.uniq.length == 1 ? puts(cracklepop1) : raise(":O")
 
      
