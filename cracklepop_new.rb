@@ -1,12 +1,4 @@
-module SwapOut
-    refine Enumerable do
-        def swap(hash)
-            map{|e| hash[e] || e}
-        end
-    end
-end
-
-module SemiWeakTyping
+module Schmutils
     refine Object do
         def add_or_return x
             self+x rescue x
@@ -14,13 +6,11 @@ module SemiWeakTyping
     end
 end
 
-using SwapOut
-using SemiWeakTyping
+using Schmutils
 def cracklepop
-    #taking advantage of some special syntax & duck typing that lets me use a block like a dynamically computed hash
     crackle = ->((i,v)){[i, i % 3 == 0 ? 'Crackle' : v ] }
     pop     = ->((i,v)){ i % 5 == 0 ? (v.add_or_return 'Pop') : v }
-    (1..100).zip(1..100).swap(crackle).swap(pop)
+    (1..100).zip(1..100).map{|e| crackle[e]}.map{|e| pop[e]}
 end
 
 puts cracklepop
